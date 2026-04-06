@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
 # Import the chunking function we built in Step 2
 from document_processor import load_and_chunk_documents
@@ -13,9 +13,8 @@ load_dotenv()
 CHROMA_PATH = "chroma_db"
 
 def get_embedding_model():
-    """Initializes and returns the OpenAI Embedding Model."""
-    # text-embedding-3-small is highly efficient, accurate, and cost-effective for RAG
-    return OpenAIEmbeddings(model="text-embedding-3-small")
+    # This runs locally on your machine for 100% free!
+    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 def build_vector_store():
     """Converts document chunks to embeddings and saves them to ChromaDB."""
