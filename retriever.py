@@ -17,17 +17,15 @@ def retrieve_context(query, k=3):
     
     return results
 
-# Test the script if run directly
+# Test the script
 if __name__ == "__main__":
-    # Feel free to change this test query to something relevant to your specific PDF!
-    test_query = "What are the standard procedures or guidelines mentioned in the document?"
+    test_query = "Summarize the document."
     
     results = retrieve_context(test_query)
     
     if results:
         print(f"\n--- Top {len(results)} Retrieved Chunks ---")
         for i, (doc, score) in enumerate(results):
-            # Note: For ChromaDB default settings, a LOWER score means a BETTER match (Distance metric)
             print(f"\n🟢 Match {i+1} (Distance Score: {score:.4f})")
             print(f"📄 Source: {doc.metadata.get('source')} | Page: {doc.metadata.get('page')}")
             print(f"📝 Content snippet: {doc.page_content[:250]}...\n")
